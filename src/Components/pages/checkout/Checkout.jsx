@@ -1,27 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoCloseOutline } from "react-icons/io5";
-
-// Fake data for products
-const initialProducts = [
-  {
-    id: 1,
-    name: "Recliner Chair Steel",
-    image: "../../../assets/rocking-chair-with-padded-seat 1.png", // Fake image path
-    price: 299.0,
-    quantity: 1,
-  },
-  {
-    id: 2,
-    name: "Gaming Chair",
-    image: "../../../assets/image_125-removebg-preview 1.png", // Fake image path
-    price: 249.0,
-    quantity: 1,
-  },
-];
+import Swal from "sweetalert2";
+import useCart from "../../../Hooks/useCart";
 
 const Checkout = () => {
-  // State for products
-  const [products, setProducts] = useState(initialProducts);
+  const [userCart, refetch] = useCart();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    if (userCart) {
+      // Initialize products state with userCart data
+      setProducts(userCart.map(product => ({
+        id: product._id,
+        image: product.photourl,
+        name: product.name,
+        price: product.price,
+        quantity: 1 // Initial quantity is set to 1 by default
+      })));
+    }
+  }, [userCart]);
 
   // Function to handle increment
   const handleIncrement = (productId) => {
@@ -31,7 +28,6 @@ const Checkout = () => {
         : product
     );
     setProducts(updatedProducts);
-    console.log("Updated Products:", updatedProducts);
   };
 
   // Function to handle decrement
@@ -42,7 +38,34 @@ const Checkout = () => {
         : product
     );
     setProducts(updatedProducts);
-    console.log("Updated Products:", updatedProducts);
+  };
+
+  // Function to handle deletion
+  const handleDelete = (productId) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(`https://electronics-bazar-server.vercel.app/userCart/${productId}`, {
+            method: "DELETE",
+          });
+          const data = await response.json();
+          if (data.deletedCount > 0) {
+            refetch(); // Refetch the cart data
+            Swal.fire('Deleted!', 'Your added product has been deleted.', 'success');
+          }
+        } catch (error) {
+          console.log("Error deleting product:", error);
+        }
+      }
+    });
   };
 
   // Calculate subtotal and total
@@ -108,7 +131,10 @@ const Checkout = () => {
                       {/* X button and Price aligned vertically */}
                       <td className="py-4 text-right w-1/6">
                         <div className="flex flex-col gap-2 items-center">
-                          <button className="font-bold text-xl">
+                          <button
+                            onClick={() => handleDelete(product.id)}
+                            className="font-bold text-xl"
+                          >
                             <IoCloseOutline />
                           </button>
                           <span className="font-semibold">€{(product.quantity * product.price).toFixed(2)}</span>

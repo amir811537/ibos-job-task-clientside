@@ -91,7 +91,7 @@ const [userCart]=useCart()
 
 
 {
-  user? <button className="btn btn-primary btn-block"><Link to='/dashboard/dashboardHome'>View cart</Link></button>
+  user? <button className="btn btn-primary btn-block"><Link to='/checkout'>View cart</Link></button>
 : ""
 }        </div>
         </div>
@@ -121,7 +121,7 @@ const [userCart]=useCart()
             <span className="badge">New</span>
           </a>
         </li>
-        <li><a>Settings</a></li>
+        <li><Link to='/addproduct'>Add products</Link></li>
         <li>   {user ? (
             
             <button

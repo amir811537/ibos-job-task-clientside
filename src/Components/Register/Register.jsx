@@ -64,9 +64,11 @@ const Register = () => {
 
     createUser(email, password)
       .then(() => {
+        navigate("/auth/login");
+
         Swal.fire({
           icon: "success",
-          title: "Registration successful",
+          title: "Registration successful Please login!",
           showConfirmButton: false,
           timer: 3000,
         });
