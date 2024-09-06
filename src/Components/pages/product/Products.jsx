@@ -1,16 +1,17 @@
-import { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-import cartimage from "../../../assets/Added.png";
-import axios from "axios";
-import Pagination from "./Pagination";
-import { AuthContext } from "../../../Authprovider/Authprovider";
-import Swal from "sweetalert2";
-import useCart from "../../../Hooks/useCart";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+/* eslint-disable no-unused-vars */
+import { useContext, useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import cartimage from '../../../assets/Added.png';
+import axios from 'axios';
+import Pagination from './Pagination';
+import { AuthContext } from '../../../Authprovider/Authprovider';
+import Swal from 'sweetalert2';
+import useCart from '../../../Hooks/useCart';
+import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 
 const Products = () => {
-  const [refetch] = useCart();
-  const axiosPublic = useAxiosPublic(); // Fixed typo from axiousPublic to axiosPublic
+  const [userCart, refetch] = useCart();
+  const axiosPublic = useAxiosPublic(); 
 
   const { user } = useContext(AuthContext);
 
@@ -19,10 +20,10 @@ const Products = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/furnitures");
+      const response = await axios.get('http://localhost:5000/furnitures');
       setFurnitures(response.data);
     } catch (error) {
-      console.log("error in data fetching", error);
+      console.log('error in data fetching', error);
     }
   };
 
@@ -38,30 +39,31 @@ const Products = () => {
     const payload = {
       photourl: furniture?.photourl,
       name: furniture?.name,
-      price: furniture?.newPrice, // Use correct price field
-      email: user?.email, // Pass current user's email
+      price: furniture?.newPrice,
+      email: user?.email,
     };
     try {
-      const response = await axiosPublic.post("/userCart", payload);
+      const response = await axiosPublic.post('/userCart', payload);
 
       if (response?.data?.insertedId) {
-        Swal.fire("Good job!", "Added to cart!", "success");
-        refetch(); // Refresh the cart data
+        Swal.fire('Good job!', 'Added to cart!', 'success');
+        if (typeof refetch === 'function') {
+          refetch(); // Refresh the cart data
+        }
       }
     } catch (error) {
-      console.log("Error adding product to cart", error);
+      console.log('Error adding product to cart', error);
     }
   };
 
   return (
     <div className="max-w-full mx-auto mt-5">
       <div className="flex justify-start gap-8">
-        {/* Sidebar Navigation */}
         <div className="w-[20%]">
           <div className="flex flex-col gap-4">
             <NavLink
               className={`${
-                activeNav === 1 ? "bg-black text-white" : "bg-white text-black"
+                activeNav === 1 ? 'bg-black text-white' : 'bg-white text-black'
               } text-base flex justify-start items-center rounded-lg px-6 py-3`}
               onClick={() => handleNavClick(1)}
             >
@@ -69,7 +71,7 @@ const Products = () => {
             </NavLink>
             <NavLink
               className={`${
-                activeNav === 2 ? "bg-black text-white" : "bg-white text-black"
+                activeNav === 2 ? 'bg-black text-white' : 'bg-white text-black'
               } text-base flex justify-start items-center rounded-lg px-6 py-3`}
               onClick={() => handleNavClick(2)}
             >
@@ -77,7 +79,7 @@ const Products = () => {
             </NavLink>
             <NavLink
               className={`${
-                activeNav === 3 ? "bg-black text-white" : "bg-white text-black"
+                activeNav === 3 ? 'bg-black text-white' : 'bg-white text-black'
               } text-base flex justify-start items-center rounded-lg px-6 py-3`}
               onClick={() => handleNavClick(3)}
             >
@@ -86,7 +88,6 @@ const Products = () => {
           </div>
         </div>
 
-        {/* Main Product Display */}
         <div className="w-[80%]">
           <div className="grid grid-cols-3 gap-5">
             {furnitures.map((furniture) => (
@@ -96,8 +97,8 @@ const Products = () => {
               >
                 <img
                   style={{
-                    backgroundColor: "#F2F2F2",
-                    borderRadius: "8px",
+                    backgroundColor: '#F2F2F2',
+                    borderRadius: '8px',
                   }}
                   src={furniture.photourl}
                   alt={furniture.name}
@@ -112,7 +113,7 @@ const Products = () => {
                   </div>
                   <p className="mt-2 text-gray-600">{furniture.description}</p>
                   <button
-                    onClick={() => handeladdtocart(furniture)} // Pass the correct furniture object
+                    onClick={() => handeladdtocart(furniture)}
                     className="mt-4 w-full flex justify-center items-center gap-2 bg-black text-white py-2 rounded-lg"
                   >
                     <img src={cartimage} alt="cart" />
