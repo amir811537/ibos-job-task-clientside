@@ -5,10 +5,8 @@ import AddProduct from "../Components/pages/AddProduct";
 import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
 import ErrorPage from "../Components/pages/ErrorPage";
-import Updateproduct from "../Components/pages/Updateproduct";
 import PrivateRoute from "./PrivateRoute";
-import Profile from "../Layouts/Profile";
-import UpdateProfileInfo from "../Layouts/UpdateProfileInfo";
+
 import Checkout from "../Components/pages/checkout/Checkout";
 
 const router=createBrowserRouter([
@@ -32,7 +30,7 @@ const router=createBrowserRouter([
             },
             {
 path:'/checkout',
-element:<Checkout></Checkout>
+element:<PrivateRoute><Checkout></Checkout></PrivateRoute>
             },
             {
                 path:"/register",
@@ -56,24 +54,16 @@ element:<Checkout></Checkout>
            
             
                 path: "AddProduct",
-                element: <AddProduct></AddProduct>
+                element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
             },
            
          
-            {
-                path:'updateproduct/:id',
-                element:<PrivateRoute><Updateproduct></Updateproduct></PrivateRoute>,
-                loader:({params})=>fetch(`https://electronics-bazar-server.vercel.app/productsbyid/${params.id}`)
-            },
-            {
-                path:'profile',
-                element:<Profile></Profile>
-            },
-            {
-                path:'updateprofileInfo/:id',
-                element:<UpdateProfileInfo></UpdateProfileInfo>,
-                loader:()=>fetch('https://electronics-bazar-server.vercel.app/profileInfo')
-            },
+            // {
+            //     path:'updateproduct/:id',
+            //     element:<PrivateRoute><Updateproduct></Updateproduct></PrivateRoute>,
+            //     loader:({params})=>fetch(`http://localhost:5000/productsbyid/${params.id}`)
+            // },
+          
             
     
 ]);

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
@@ -12,7 +13,7 @@ const auth = getAuth(app);
 const Authprovider = ({children}) => {
 
     const googleProvider= new GoogleAuthProvider();
-    const googleSignin=(value)=>{
+    const googleSignin=()=>{
         setloading(true);
         return signInWithPopup(auth,googleProvider);
        }

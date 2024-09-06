@@ -29,7 +29,7 @@ const Register = () => {
         const userData = { email: userEmail, name: userName, userImage };
 
         axios
-          .post(`https://electronics-bazar-server.vercel.app/profileInfo`, userData)
+          .post(`http://localhost:5000/profileInfo`, userData)
           .then(() => {
             Swal.fire({
               icon: "success",
