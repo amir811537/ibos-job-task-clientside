@@ -18,6 +18,7 @@ import ManageUser from "../Layouts/ManageUser";
 import Profile from "../Layouts/Profile";
 import UpdateProfileInfo from "../Layouts/UpdateProfileInfo";
 import DashboardHome from "../Layouts/DashboardHome";
+import Checkout from "../Components/pages/checkout/Checkout";
 // import Singelcard from "../Components/pages/Singelcard";
 
 const router=createBrowserRouter([
@@ -43,6 +44,10 @@ const router=createBrowserRouter([
                 element: <Login></Login>
             },
             {
+path:'/checkout',
+element:<Checkout></Checkout>
+            },
+            {
                 path:"/register",
                 element:<Register></Register>
             },
@@ -66,6 +71,16 @@ const router=createBrowserRouter([
             }
             
         ]
+    },
+    {
+        path:'auth/register',
+        element:<Register></Register>,
+    
+    },
+    {
+        path:'auth/login',
+        element:<Login></Login>,
+    
     },
     {
         path:"dashboard",

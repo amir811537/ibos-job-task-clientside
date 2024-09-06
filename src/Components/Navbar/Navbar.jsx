@@ -62,7 +62,7 @@ const [userCart]=useCart()
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-      <li><Link>Home</Link></li>
+      <li><Link to='/'>Home</Link></li>
       <li><Link>Products</Link></li>
       <li><Link>Categories</Link></li>
       <li><Link>Custom</Link></li>
@@ -132,8 +132,8 @@ const [userCart]=useCart()
         
         ) : (
           
-            <Link to="/login">
-              <button className="">Login</button>
+            <Link to="/auth/register">
+              <button className="">SignUp</button>
             </Link>
         
         )}</li>
