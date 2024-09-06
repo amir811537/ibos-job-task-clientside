@@ -1,7 +1,6 @@
 
 /* eslint-disable react/no-unescaped-entities */
-import { Link, NavLink } from "react-router-dom";
-import { RiMenu3Line } from "react-icons/ri";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Authprovider/Authprovider";
 import { FaCircleUser } from "react-icons/fa6";
@@ -18,96 +17,68 @@ const [userCart]=useCart()
         console.error(error);
       });
   };
-  const navlinks = (
-    <>
-      <li>
-        <NavLink className=" text-xl text-[#00FFA7]" to="/">
-          Home
-        </NavLink>
-      </li>
-  
-      <li>
-        <NavLink className=" text-xl  hover:text-[#00FFA7]" to="/alldata">
-          Products
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className=" text-xl   hover:text-[#00FFA7]"
-          to="/contacts"
-        >
-          Contacts
-        </NavLink>
-      </li>
-    </>
-  );
+
 
   return (
-    <div className="navbar flex items-center  md:justify-evenly p-8 h-24 w-full ">
-      <div className="flex justify-between items-center">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <RiMenu3Line className=" text-2xl" />
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box text-black lg: w-52"
-          >
+//     
 
-  <div className="flex-none">
+
+<div>
+<div className="navbar bg-base-100 px-10">
+  <div className="navbar-start">
+{/* for mobile nav */}
     <div className="dropdown">
-<Link to='/dashboard/dashboardHome'>
-
-{
-  user? <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-  <div className="indicator">
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-    <span className="badge badge-sm indicator-item">{userCart?.length}</span>
-  </div>
-</div>: ""
-}
-</Link>
-    </div>
+      <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 6h16M4 12h8m-8 6h16" />
+        </svg>
       </div>
+      <ul
+        tabIndex={0}
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+      <li><Link>Home</Link></li>
+      <li><Link>Products</Link></li>
+      <li><Link>Categories</Link></li>
+      <li><Link>Custom</Link></li>
+      <li><Link>Blogs</Link></li>
+      </ul>
+    </div>
 
-            {navlinks}
-            {user ? (
-            
-                <button
-                  className="btn border btn-outline"
-                  onClick={handelsingout}
-                >
-                 <FaCircleUser/> Sign Out
-                </button>
-             
-            ) : (
-           
-                <Link to="/login">
-                  <button className="btn border btn-outline">Login</button>
-                </Link>
-             
-            )}
-
-           
-          </ul>
-        </div>
-
-        <Link to="/">
-        <h2 className="text-xl mr-14 uppercase font-semibold">Greenmind</h2>
-        </Link>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 text-black lg:">
-            {navlinks}
-          </ul>
-        </div>
-
-        <div className=" hidden lg:flex lg:ml-32">
+    <a href="/" className="text-xl flex items-center">
+  <span className="bg-[#1E99F5] text-black rounded-full w-8 h-8 text-xl font-[lucida-calligraphy] flex justify-center items-center">
+    F
+  </span>
+  <span className=" ml-2">Furni <span className="text-[#1E99F5]">Flex</span></span>
+</a>
+  </div>
+  <div className="navbar-center hidden lg:flex">
+    <ul className="menu menu-horizontal px-1">
+      <li><Link>Home</Link></li>
+      <li><Link>Products</Link></li>
+      <li><Link>Categories</Link></li>
+      <li><Link>Custom</Link></li>
+      <li><Link>Blogs</Link></li>
+     
+ 
+    </ul>
+  </div>
+  <div className="navbar-end">
+  <div className=" hidden lg:flex ">
         <div className="flex-none mr-4">
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
         <div className="indicator">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-<Link to='/dashboard/dashboardHome'>
+<Link to='/'>
 <span className="badge badge-sm indicator-item">{userCart?.length}</span>
 
 </Link>
@@ -127,25 +98,53 @@ const [userCart]=useCart()
       </div>
     </div>
       </div>
-          {user ? (
-            
-              <button
-                className="btn border btn-outline"
-                onClick={handelsingout}
-              >
- <FaCircleUser className="text-xl" /> Sign Out  </button>
-          
-          ) : (
-            
-              <Link to="/login">
-                <button className="btn border btn-outline">Login</button>
-              </Link>
-          
-          )}
+       
         
         </div>
+    
+  <div className="dropdown dropdown-end">
+      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+        <div className="w-10 rounded-full">
+        {user ? (
+              <img src={user.photoURL} />
+            ) : (
+              <img src="https://i.ibb.co/gjNbZy2/user.png" />
+            )}
+        </div>
       </div>
+      <ul
+        tabIndex={0}
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+        <li>
+          <a className="justify-between">
+            Profile
+            <span className="badge">New</span>
+          </a>
+        </li>
+        <li><a>Settings</a></li>
+        <li>   {user ? (
+            
+            <button
+              className=""
+              onClick={handelsingout}
+            >
+<FaCircleUser className="text-xl" /> Sign Out  </button>
+        
+        ) : (
+          
+            <Link to="/login">
+              <button className="">Login</button>
+            </Link>
+        
+        )}</li>
+      </ul>
     </div>
+  </div>
+
+  </div>
+  <hr className="text-[#F1F1F1] w-full mt-3 mb-6" />
+
+</div>
   );
 };
 
