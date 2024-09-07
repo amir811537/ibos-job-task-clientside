@@ -22,7 +22,7 @@ const AddProduct = () => {
     const product = { photourl, name, newPrice, oldPrice, discountPercentage, description };
 console.log('===========>',product)
     axios
-      .post("http://localhost:5000/furnitures", product)
+      .post("https://ibos-serverside.vercel.app/furnitures", product)
       .then((res) => {
         console.log("add====>", res.data);
         if (res.data.insertedId) {

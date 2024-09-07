@@ -61,7 +61,7 @@ element:<PrivateRoute><Checkout></Checkout></PrivateRoute>
             // {
             //     path:'updateproduct/:id',
             //     element:<PrivateRoute><Updateproduct></Updateproduct></PrivateRoute>,
-            //     loader:({params})=>fetch(`http://localhost:5000/productsbyid/${params.id}`)
+            //     loader:({params})=>fetch(`https://ibos-serverside.vercel.app/productsbyid/${params.id}`)
             // },
           
             

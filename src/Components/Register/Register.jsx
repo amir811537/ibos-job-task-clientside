@@ -29,7 +29,7 @@ const Register = () => {
         const userData = { email: userEmail, name: userName, userImage };
 
         axios
-          .post(`http://localhost:5000/profileInfo`, userData)
+          .post(`https://ibos-serverside.vercel.app/profileInfo`, userData)
           .then(() => {
             Swal.fire({
               icon: "success",

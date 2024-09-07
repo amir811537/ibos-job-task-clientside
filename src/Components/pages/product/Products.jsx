@@ -21,7 +21,7 @@ const Products = () => {
 
   const getData = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/furnitures');
+      const response = await axios.get('https://ibos-serverside.vercel.app/furnitures');
       setFurnitures(response.data);
     } catch (error) {
       console.log('error in data fetching', error);

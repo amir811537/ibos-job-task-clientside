@@ -53,7 +53,7 @@ const Checkout = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`http://localhost:5000/userCart/${productId}`, {
+          const response = await fetch(`https://ibos-serverside.vercel.app/userCart/${productId}`, {
             method: "DELETE",
           });
           const data = await response.json();
