@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import cartimage from '../../../assets/Added.png';
 import axios from 'axios';
 import Pagination from './Pagination';
@@ -12,6 +12,7 @@ import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 const Products = () => {
   const [userCart, refetch] = useCart();
   const axiosPublic = useAxiosPublic(); 
+  const navigate= useNavigate();
 
   const { user } = useContext(AuthContext);
 
@@ -36,15 +37,21 @@ const Products = () => {
   };
 
   const handeladdtocart = async (furniture) => {
+    if (!user) {
+      navigate('auth/login'); // Redirect to login if the user is not logged in
+      return;
+    }
+  
     const payload = {
       photourl: furniture?.photourl,
       name: furniture?.name,
       price: furniture?.newPrice,
       email: user?.email,
     };
+  
     try {
       const response = await axiosPublic.post('/userCart', payload);
-
+  
       if (response?.data?.insertedId) {
         Swal.fire('Good job!', 'Added to cart!', 'success');
         if (typeof refetch === 'function') {
@@ -55,6 +62,7 @@ const Products = () => {
       console.log('Error adding product to cart', error);
     }
   };
+  
 
   return (
     <div className="max-w-full mx-auto mt-5">
